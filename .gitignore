@@ -1,0 +1,23 @@
+# Visual Studio specific
+.vs/
+*.user
+*.suo
+*.cache
+*.db
+*.idx
+*.log
+*.pdb
+*.obj
+*.exe
+*.dll
+*.pdb
+
+# ASP.NET specific
+bin/
+obj/
+node_modules/
+wwwroot/
+
+# Environment variables & secrets
+appsettings*.json
+.env
