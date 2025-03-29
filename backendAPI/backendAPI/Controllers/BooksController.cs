@@ -44,9 +44,5 @@ namespace backendAPI.Controllers
             return Ok(someBook);
         }
 
-        //public IEnumerable<Book> GetFunctionalBooks()
-        //{
-        //    var someNewBook = _booksContext.Books.Where(b => b.)
-        //}
     }
 }
