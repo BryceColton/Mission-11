@@ -14,7 +14,7 @@ namespace backendAPI.Controllers
         public BooksController(BooksDbContext temp) => _booksContext = temp;
 
         [HttpGet("AllBooks")]
-        public IActionResult GetBooks(int pageSize = 10, int pageNum = 1, string? sortBy = null)
+        public IActionResult GetBooks(int pageSize = 10, int pageNum = 1, string? sortBy = null, [FromQuery] List<string>? projectTypes = null)
         {
 
             var query = _booksContext.Books.AsQueryable();
@@ -25,6 +25,11 @@ namespace backendAPI.Controllers
                     query = query.OrderBy(b => b.Title);
                 else if (sortBy.ToLower() == "title_desc")
                     query = query.OrderByDescending(b => b.Title);
+            }
+
+            if (projectTypes != null && projectTypes.Any())
+            {
+                query = query.Where(p => projectTypes.Contains(p.Classification));
             }
 
             var totalNumBooks = query.Count();
@@ -42,6 +47,18 @@ namespace backendAPI.Controllers
             };
 
             return Ok(someBook);
+        }
+
+
+        [HttpGet("GetBookCategories")]
+        public IActionResult GetBookCategories()
+        {
+            var bookTypes = _booksContext.Books
+                .Select(b => b.Classification)
+                .Distinct()
+                .ToList();
+
+            return Ok(bookTypes);
         }
 
     }
