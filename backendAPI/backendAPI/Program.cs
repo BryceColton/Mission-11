@@ -10,8 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var dbPath = Path.Combine(AppContext.BaseDirectory, "Bookstore.sqlite");
 builder.Services.AddDbContext<BooksDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("BookConnection")));
+    options.UseSqlite($"Data Source={dbPath}"));
 
 builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
