@@ -5,7 +5,7 @@ interface FetchBooksResponse {
     totalNumBooks: number;
 }
 
-const API_URL = 'https://localhost:5000/Books'
+const API_URL = 'https://mission-13-bryce-backend2-dnaadmeegqbsgfea.eastus2-01.azurewebsites.net/Books'
 
 export const fetchBooks = async (
     pageSize: number,
@@ -20,7 +20,7 @@ export const fetchBooks = async (
         .join('&');
     
     
-        const response = await fetch(`https://localhost:5000/Books/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}&sortBy=${sortBy}${selectedCategories.length ? `&${categoryParams}` : ''}`
+        const response = await fetch(`${API_URL}/AllBooks?pageSize=${pageSize}&pageNum=${pageNum}&sortBy=${sortBy}${selectedCategories.length ? `&${categoryParams}` : ''}`
         );
 
         if (!response.ok) {
