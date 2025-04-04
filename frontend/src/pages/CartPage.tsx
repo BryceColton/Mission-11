@@ -25,7 +25,14 @@ function CartPage () {
                     )}
                 </ul>
                 }</div>
-                    <h3>Total: ${cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}</h3>
+                    <h3>
+                        Total: $
+                        {cart.reduce((total, item) => {
+                            const price = Number(item.price) || 0;
+                            const quantity = Number(item.quantity) || 0;
+                            return total + price * quantity;
+                        }, 0).toFixed(2)}
+                        </h3>
                     <button>Checkout</button>
             <button onClick={() => navigate('/books')}>Continue Browsing</button>
         </div>
