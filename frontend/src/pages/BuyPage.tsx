@@ -11,7 +11,7 @@ function BuyPage() {
     const {title, id, price} = useParams();
     const {addToCart} = useCart();
     // const [donationAmount, setDonationAmount] = useState<number>(0);
-    const [quantity, setQuantity] = useState<number>(1);
+    const [quantity] = useState<number>(1);
 
     const handleAddToCart = () => {
         const newItem: CartItem = {

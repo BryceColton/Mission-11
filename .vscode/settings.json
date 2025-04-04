@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/b782fde8-bbfb-408d-9516-c3013e39a9e6/resourceGroups/appsvc_windows_eastus2/providers/Microsoft.Web/sites/Mission-13-Bryce-Backend2",
+    "appService.deploySubpath": "backendAPI\\backendAPI\\publish"
+}
