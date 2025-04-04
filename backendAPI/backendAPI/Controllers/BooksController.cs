@@ -29,7 +29,7 @@ namespace backendAPI.Controllers
 
             if (projectTypes != null && projectTypes.Any())
             {
-                query = query.Where(p => projectTypes.Contains(p.Classification));
+                query = query.Where(p => projectTypes.Contains(p.Category));
             }
 
             var totalNumBooks = query.Count();
@@ -54,11 +54,57 @@ namespace backendAPI.Controllers
         public IActionResult GetBookCategories()
         {
             var bookTypes = _booksContext.Books
-                .Select(b => b.Classification)
+                .Select(b => b.Category)
                 .Distinct()
                 .ToList();
 
             return Ok(bookTypes);
+        }
+
+
+        [HttpPost("AddBook")]
+        public IActionResult AddProject([FromBody] Book newBook)
+        {
+            _booksContext.Books.Add(newBook);
+            _booksContext.SaveChanges();
+            return Ok(newBook);
+        }
+
+
+        [HttpPut("UpdateBook/{bookId}")]
+        public IActionResult UpdateProject(int bookId, [FromBody] Book updatedBook)
+        {
+            var existingBook = _booksContext.Books.Find(bookId);
+
+            existingBook.Title = updatedBook.Title;
+            existingBook.Author = updatedBook.Author;
+            existingBook.Publisher = updatedBook.Publisher;
+            existingBook.ISBN = updatedBook.ISBN;
+            existingBook.Classification = updatedBook.Classification;
+            existingBook.PageCount = updatedBook.PageCount;
+            existingBook.Price = updatedBook.Price;
+
+
+            _booksContext.Books.Update(existingBook);
+            _booksContext.SaveChanges();
+
+            return Ok(existingBook);
+        }
+
+        [HttpDelete("DeleteBook/{bookId}")]
+        public IActionResult DeleteProject(int bookId)
+        {
+            var book = _booksContext.Books.Find(bookId);
+
+            if (book == null)
+            {
+                return NotFound(new { message = "Book not found" });
+            }
+
+            _booksContext.Books.Remove(book);
+            _booksContext.SaveChanges();
+
+            return NoContent();
         }
 
     }

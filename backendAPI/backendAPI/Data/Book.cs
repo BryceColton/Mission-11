@@ -23,6 +23,9 @@ namespace backendAPI.Data
         public string Classification { get; set; } // Or Category
 
         [Required]
+        public string Category { get; set; }
+
+        [Required]
         public int PageCount { get; set; }
 
         [Required]
