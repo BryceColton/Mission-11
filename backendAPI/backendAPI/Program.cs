@@ -24,6 +24,9 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.UseCors("AllowReactApp");
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -32,7 +35,6 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseCors("AllowReactApp");
 
 app.UseHttpsRedirection();
 
