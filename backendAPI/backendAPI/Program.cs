@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
     policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://mango-smoke-07062ba0f.6.azurestaticapps.net")
             .AllowAnyHeader()
             .AllowAnyMethod();
     }));
