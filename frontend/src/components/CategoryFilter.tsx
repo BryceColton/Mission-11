@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import './CategoryFilter.css'
+import { API_URL } from "../api/Books.api";
 
 
 function CategoryFilter ({
@@ -17,7 +18,7 @@ function CategoryFilter ({
         const fetchCategories = async () => {
         try {
 
-                const response = await fetch(`https://localhost:5000/Books/GetBookCategories`);
+                const response = await fetch(`${API_URL}/Books/GetBookCategories`);
     
                 const data = await response.json();
                 console.log(`Fetched categories:`, data);
